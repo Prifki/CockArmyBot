@@ -1,12 +1,11 @@
 #!/usr/bin/python3.4
 # -*- coding: utf-8 -*-
 
-import config
-import botan
 import telebot
 from telebot import types
+token = '292704887:AAFq9AMtsJjvTWp5gfdVRiDxieEe6-kChTE'
 
-bot = telebot.TeleBot(config.token)
+bot = telebot.TeleBot(token)
 
 def make_unit(unit):
     res=''
@@ -53,7 +52,7 @@ def query_text(query):
 		title="Бригада 🐔🐔🐔🐔🐔🐔🐔",
         input_message_content=types.InputTextMessageContent(message_text=make_unit(1930))
     )
-    
+
     results.append(petuch)
     results.append(group)
     results.append(vzvod)
@@ -61,8 +60,10 @@ def query_text(query):
     results.append(batalion)
     results.append(polk)
     results.append(brigada)
-	
-    botan.track(config.botan_key, query.id, query, query.from_user.last_name)
+    print(query)
+    log = open('log.txt', 'a')
+    log.write(str(query)+'\n')
+    log.close()
     bot.answer_inline_query(query.id, results)
 
 if __name__ == '__main__':
